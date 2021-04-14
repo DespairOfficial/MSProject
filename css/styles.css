@@ -1,0 +1,31 @@
+
+.oddParagraph{
+    background-color: rgb(233, 233, 233);
+}
+.MarkedToParagraph
+{
+    background-color: rgb(233, 233, 233);
+}
+.btn-mark-ticket{
+    font-size: 15px;
+}
+.ticketsincourse
+{
+    margin: 15px;
+}
+.MarkedToRemove{
+    background-color: rgb(190, 152, 152);
+}
+.errorvoid{
+    border-bottom: 2px solid rgb(170, 41, 41);
+}
+input{
+    margin: 10px 0;
+    border: unset;
+    border-bottom: 2px solid #e3e3e3;
+    outline: none;
+}
+.error{
+    border-bottom: 2px solid rgb(170, 41, 41);
+}
+
