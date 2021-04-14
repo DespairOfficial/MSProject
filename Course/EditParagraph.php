@@ -29,7 +29,7 @@ $course_id = get_courseID_by_paragraph($paragraph);
                     </div>
                 </div>
                 <div>
-                    <label>Добавить билет в тему</label>
+                    <label>Добавить новый билет в тему</label>
                     <br>
                     <form>
                         <label >Вопрос: </label>

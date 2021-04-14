@@ -17,10 +17,12 @@ if($question=='')
 }
 if(count($error_fields)==0)
 {
-    add_new_ticket($question,$answer,$paragraph,$created_by);
+    add_new_ticket_to_paragraph($question,$answer,$paragraph,$created_by);
+    $ticket_id = get_ticket_by_question($question,$answer)['id'];
     $responce = [
         'status' =>true,
-        "message"=>"Билет успешно добавлен"];
+        "message"=>"Билет успешно добавлен",
+        "ticket_id" =>  $ticket_id];
     
     echo json_encode($responce);
     die();

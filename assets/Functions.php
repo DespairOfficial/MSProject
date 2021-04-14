@@ -161,37 +161,6 @@ function EditTicket($Question, $Answer,$Theme,$ticket_id)
     
     return $tickets;  
 }
-
-function addTicket($Question, $Answer)
-{
-    global $link;
-    $Question = mysqli_real_escape_string($link, $Question);
-    $Answer = mysqli_real_escape_string($link, $Answer);
-
-    $query = 'SELECT * FROM tickets WHERE Question='."$Question";
-    $result = mysqli_query($link, $query);
-    
-    if(!$result)
-    {
-        
-        //если такого билета нет
-        $insert_query = "INSERT INTO tickets (Question, Answer) VALUES ('$Question','$Answer')";
-
-        $insertresult = mysqli_query($link, $insert_query);
-        if($insertresult)
-        {
-            return "Created";
-        }
-        else return "Fail";
-
-    }
-    else
-    {   
-        return 'Ticket exists';
-    }
-    
-}
-
 function sign_student_on_course($student_id, $course_id)
 {
     global $link;
@@ -242,7 +211,7 @@ function is_student_passed_test($student_id,$paragraph_id)
 }
 
 
-function add_new_ticket($question,$answer,$paragraph_id,$created_by)
+function add_new_ticket_to_paragraph($question,$answer,$paragraph_id,$created_by)
 {
     
     global $link;
@@ -259,4 +228,12 @@ function add_new_ticket($question,$answer,$paragraph_id,$created_by)
 
     $query = "INSERT INTO paragraph_tickets (paragraph_id,ticket_id) VALUES ('$paragraph_id','$ticket_id')";
     mysqli_query($link, $query);
+}
+function get_ticket_by_question($question,$answer)
+{
+    global $link;
+    $query = "SELECT * FROM tickets WHERE Question='$question' and Answer = '$answer'";
+    $result = mysqli_query($link, $query);
+    $ticket = mysqli_fetch_assoc($result);
+    return $ticket;
 }

@@ -257,6 +257,16 @@ $('#addnewticket').click (function(e){
             if(data.status)
             {
                 $('#addedmessage').text(data.message)
+                let div = document.createElement('div');
+                ticket_id = data.ticket_id
+                let div_content = ` <label name = 'Question' >Вопрос: ${question}</label>
+                                    <label name= 'Answer' >Ответ: ${answer}</label>
+                                    <label name='id' >Номер билета: ${ticket_id}</label>`
+                div.innerHTML = div_content
+                div.setAttribute('class',"row")
+                div.setAttribute('id',`row${ticket_id}`)
+                div.setAttribute('onclick',`mark_this_to_remove(${ticket_id})`)
+                $('#paragraphtickets').append(div)
             }
             else{
                 $('#addedmessage').text(data.message)
