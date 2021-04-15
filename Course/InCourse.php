@@ -10,7 +10,9 @@ $paragraphs = get_paragraphs_by_owner_id($course_id);
 $counter = 0;
 $_SESSION['curr_course'] = $course_id;
 ?>
-
+<script>
+    course_id = <?=$course_id?>
+</script>
 <div class="container-fluid">
     <div class="row">
         <?php foreach ($paragraphs as $paragraph): ?>
@@ -48,6 +50,9 @@ $_SESSION['curr_course'] = $course_id;
             </div>
             
         <?php endforeach;  ?>
+        <?if(!($_SESSION['user']['Role']==='Student')):?>
+        <button id = "addparagraph">Добавить</button>
+        <?endif;?>
     </div>
 </div>
 

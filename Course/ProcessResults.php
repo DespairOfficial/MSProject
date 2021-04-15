@@ -34,16 +34,30 @@ if(count($error_fields)>0)
     echo json_encode($responce);
     die();
 }
-
+$right_answers = 0;
 for($i = 0; $i<count($ids); $i++)
 {   
     $his_answer = $answers[$i];
     $ticket_id = str_replace('testanswer','',$ids[$i]);
-    add_students_answer($student_id,$paragraph_id,$ticket_id,$his_answer);  
-    
+    if(is_answer_right($his_answer,$ticket_id))
+    {
+        $right_answers+=1;
+    } 
 }
-student_passed_test($student_id,$paragraph_id);
-$responce = ['status' => '1'];
+$amount_of_questions = count($ids);
+$test_result = (int)($right_answers/$amount_of_questions *100);
+
+if(!$test_result==0)
+{
+    for($i = 0; $i<count($ids); $i++)
+    {   
+        $his_answer = $answers[$i];
+        $ticket_id = str_replace('testanswer','',$ids[$i]);
+        add_students_answer($student_id,$paragraph_id,$ticket_id,$his_answer); 
+    }
+    student_passed_test($student_id,$paragraph_id,$test_result);
+}
+$responce = ['status' => '1',"test_res"=>$test_result];
 echo json_encode($responce);
 die();
 

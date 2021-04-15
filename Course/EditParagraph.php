@@ -44,9 +44,9 @@ $course_id = get_courseID_by_paragraph($paragraph);
                     <div class="col-5 border">
                         Билеты в этой теме: 
                         <?$paragraph_tickets = get_tickets_by_paragraph($paragraph_id);?>
-                        <div class="containter-fluid border" id ="paragraphtickets">
+                        <div class="containter-fluid" id ="paragraphtickets">
                             <?php foreach($paragraph_tickets as $ticket):?> 
-                                <div class="row" id="row<?=$ticket['id']?>" onclick="mark_this_to_remove(<?=$ticket['id']?>)">
+                                <div class="row border" id="row<?=$ticket['id']?>" onclick="mark_this_to_remove(<?=$ticket['id']?>)">
                                         <label name = 'Question' >Вопрос: <?=$ticket['Question']?></label>
                                         <label name= 'Answer' >Ответ: <?=$ticket['Answer']?></label>
                                         <label name='id' >Номер билета: <?=$ticket['id']?></label>
@@ -60,9 +60,9 @@ $course_id = get_courseID_by_paragraph($paragraph);
                     </div>
                     <div class="col-5 border"> Все билеты:
                         <?$tickets = get_tickets_by_course_not_in_paragraph($paragraph['OwnerCourse'],$paragraph['id']);?>
-                        <div class="containter-fluid border" id ="coursetickets">
+                        <div class="containter-fluid" id ="coursetickets">
                             <?php foreach($tickets as $ticket):?> 
-                                <div class="row" id="row<?=$ticket['id']?>" onclick="mark_this_to_paragraph(<?=$ticket['id']?>)">
+                                <div class="row border" id="row<?=$ticket['id']?>" onclick="mark_this_to_paragraph(<?=$ticket['id']?>)">
                                         <label name = 'Question' >Вопрос: <?=$ticket['Question']?></label>
                                         <label name= 'Answer' >Ответ: <?=$ticket['Answer']?></label>
                                         <label name='id' >Номер билета: <?=$ticket['id']?></label>

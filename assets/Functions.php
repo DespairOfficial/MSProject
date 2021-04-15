@@ -137,29 +137,17 @@ function get_course_by_id($course_id)
 
 
 
-function EditTicket($Question, $Answer,$Theme,$ticket_id)
+function EditTicket($Question, $Answer,$ticket_id)
 {
     global $link;
     $Question = mysqli_real_escape_string($link, $Question);
     $Answer = mysqli_real_escape_string($link, $Answer);
-    $Theme = mysqli_real_escape_string($link, $Theme);
     $ticket_id = mysqli_real_escape_string($link, $ticket_id);
     $ticket_id = (int) $ticket_id;
-    $select_query = 'SELECT * FROM tickets WHERE id='."$ticket_id";
+    $select_query = "SELECT * FROM tickets WHERE id='$ticket_id'";
     $search_result = mysqli_query($link, $select_query);
-    if($search_result)
-    {
-        $update_query = 'UPDATE tickets SET Question ="'."$Question".'", Answer ="'."$Answer".'" ,Theme ="'."$Theme".'" WHERE id='."$ticket_id";
-        var_dump($update_query);
-    }
-    else return 'error';
-    $update_result = mysqli_query($link, $update_query);
-    if($update_result)
-    {
-        return 'Success';
-    }
-    
-    return $tickets;  
+    $update_query = "UPDATE tickets SET Question='$Question', Answer ='$Answer' WHERE id='$ticket_id'";
+    mysqli_query($link, $update_query);
 }
 function sign_student_on_course($student_id, $course_id)
 {
@@ -188,10 +176,10 @@ function add_students_answer($student_id,$paragraph_id,$ticket_id,$his_answer)
     mysqli_query($link, $query);
 }
 
-function student_passed_test($student_id,$paragraph_id)
+function student_passed_test($student_id,$paragraph_id,$test_result)
 {
     global $link;
-    $query = "INSERT INTO passed_tests (student_id,paragraph_id) VALUES ('$student_id','$paragraph_id')";
+    $query = "INSERT INTO passed_tests (student_id,paragraph_id,solved_percent) VALUES ('$student_id','$paragraph_id','$test_result')";
     mysqli_query($link, $query);
 }
 
@@ -236,4 +224,36 @@ function get_ticket_by_question($question,$answer)
     $result = mysqli_query($link, $query);
     $ticket = mysqli_fetch_assoc($result);
     return $ticket;
+}
+function is_answer_right($answer,$ticket_id)
+{
+    global $link;
+    $query = "SELECT Answer FROM tickets WHERE id = '$ticket_id'";
+    $result = mysqli_query($link, $query);
+    $ticket = mysqli_fetch_assoc($result);
+    $right_answer = $ticket['Answer'];
+
+    
+    if($right_answer==$answer)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+function get_my_grades($student_id)
+{
+    global $link;
+    $query = "SELECT paragraphs.Name, solved_percent from passed_tests INNER join paragraphs ON passed_tests.paragraph_id = paragraphs.id WHERE student_id = '$student_id'";
+    $result = mysqli_query($link, $query);
+    $grades = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $res = []; 
+    foreach ($grades as $grade)
+    {
+        $res[] = $grade['Name'] . '|' . $grade['solved_percent'];
+    }
+    
+    return $res;
 }

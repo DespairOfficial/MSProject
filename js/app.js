@@ -117,13 +117,8 @@ $('#code_word_submit').click (function(e){ //кнопка подтвержден
             else{
                 $('.msg-code-word').text(data.message);
                 $('input[name="code_word_input"]').addClass('error');
-            }
-            
+            } 
         }
-
-
-
-
     })
 
 })
@@ -230,8 +225,17 @@ $('#endtestbutton').click (function(e){
                 data.error_fields.forEach(function(field){
                     $('#'+field).addClass('errorvoid')});
             }
-            else{
-                document.location.href = "InCourse.php";    
+            else{ 
+                if(data.test_res==0)
+                {
+                    $('#testresult').text('Поздравляем, вы завалили тест!'); 
+                }
+                else
+                {
+                    $('#testresult').text('Ваш результат: ' + data.test_res+'%'); 
+                }
+
+                $('#endtestbutton').prop('disabled',true)
             }
             
         }
@@ -278,4 +282,9 @@ $('#addnewticket').click (function(e){
 
         }
     })
+})
+
+$('#addparagraph').click (function(e){
+    e.preventDefault();
+    document.location.href = "CreateParagraphPage.php?id="+course_id; 
 })

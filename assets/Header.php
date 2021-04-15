@@ -21,13 +21,10 @@ require_once 'Functions.php';
 	<a class="navbar-brand" style ="margin-left: 10px;"href="../index.php">Home</a>
 		<ul class="navbar-nav">
 			<li class="nav-item">
-			<a class="nav-link" href="../assets/SelfProfile.php">MyProfile</a>
+			<a class="nav-link" href="../assets/SelfProfile.php">Мой профиль</a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href="#">Link 2</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#">Link 3</a>
+			<a class="nav-link" href="../Course/CoursesPage.php">Курсы</a>
 			</li>
 		</ul>
 </nav>

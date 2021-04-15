@@ -17,7 +17,7 @@ $users = get_users();
                     </div>
                     <div class="row">
                         <div class="span6">
-                            <h4><strong><a href="EditUser.php?id=<?=$user['id']?>">User: <?=$user["id"]?></a></strong></h4>
+                            <h4><strong><a href="assets/Profile.php?id=<?=$user["id"]?>">User: <?=$user["id"]?></a></strong></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -30,7 +30,7 @@ $users = get_users();
                             <p>
                                 <?=$user["Question"]?>
                             </p>
-                            <a role="button" class="btn btn-success" href="Edituser.php?id=<?=$user['id']?>" value = "Изменить"></a>
+                            <a role="button" class="btn btn-success" href="" value = "Изменить"></a>
                         </div>
                     </div>
                     

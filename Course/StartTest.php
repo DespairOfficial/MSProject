@@ -20,6 +20,7 @@ $_SESSION['curr_paragraph'] = $paragraph_id;
     
     <?endforeach;?>
     <button id="endtestbutton">Отправить</button>
+    <p id="testresult"></p>
 </form>
 
 <?php require '../assets/Footer.php' ?>

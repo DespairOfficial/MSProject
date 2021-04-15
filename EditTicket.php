@@ -28,12 +28,6 @@ $ticket =  get_ticket_by_id($ticket_id); //получаем массив дан�
                 <p> <input type="text" name="Answer" value="<?=$ticket["Answer"]?>" required><br> </p>
             </div>
         </div>
-        <label>Тема:</label><br>
-        <div class="row">
-            <div class="span6">      
-                <p> <input type="text" name="Theme" value="<?=$ticket["Theme"]?>" required><br> </p>
-            </div>
-        </div>
         <div class="row">
             <div class="span6">      
                 <p> <input class="btn btn-success" type="submit" value="Изменить"><br> </p>
