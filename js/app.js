@@ -288,3 +288,61 @@ $('#addparagraph').click (function(e){
     e.preventDefault();
     document.location.href = "CreateParagraphPage.php?id="+course_id; 
 })
+
+
+
+//изменение профиля
+let User_Image_Edited = false;
+$('input[name="ImageEdit"]').change(function(e){
+    User_Image_Edited = e.target.files[0];
+
+})
+
+
+$('#editprofile').click (function(e){
+    e.preventDefault();
+
+    $('input').removeClass('error');
+
+    let login = $('input[name="login_edit"]').val(),
+        password = $('input[name="password_edit"]').val(),
+        full_name = $('input[name="full_name_edit"]').val(),
+        password_conformation = $('input[name="password_edit_conformation"]').val();
+
+    let formData = new FormData();
+    formData.append('Login', login);
+    formData.append('Password', password);
+    formData.append('Password_Conformation', password_conformation);
+    formData.append('Full_name', full_name);
+    formData.append('Image', User_Image_Edited);
+
+    $.ajax({
+
+        url: 'ConfirmChanges.php',
+        type: 'POST',
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData, 
+        success (data){
+
+            
+            if(data.status)
+            {
+                document.location.href = "SelfProfile.php";
+            }
+            else{
+                if(data.type === 1)
+                {
+                    data.fields.forEach(function(field) {
+                        $('input[name="'+field+'"]').addClass('error')
+                    });
+                }
+
+                $('.editmsg').removeClass('none').text(data.message);
+            }
+            
+        }
+    })
+})
