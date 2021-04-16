@@ -346,3 +346,28 @@ $('#editprofile').click (function(e){
         }
     })
 })
+
+$('#confirm_par_edit').click (function(e){
+    e.preventDefault();
+    let name = $('#paragraph_name').val(), 
+    description = $('textarea[name="Description"]').val();
+    $.ajax({
+
+        url: 'ConfirmParagraphEdit.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            name: name,
+            description: description
+        }, 
+        success (data){
+            $('#changed_label').text(data.message);
+            if(!data.status)
+            {
+                data.fields.forEach(function(field){
+                    $('#'+field).addClass('error')
+                })
+            }
+        }
+    })
+})

@@ -39,4 +39,5 @@ if($_SESSION['user'])
 
 
 
-<?php require '../assets/Footer.php' ?>
+<script src= "/js/jquery-3.6.0.js"type="text/javascript"></script>
+<script src= "/js/app.js"></script>

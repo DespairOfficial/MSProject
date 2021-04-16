@@ -16,20 +16,21 @@ $course_id = get_courseID_by_paragraph($paragraph);
 </script>
 <div class="container-fluid">
     <div class="row">
-        <form action="post">
             <div class="row" style="margin: 10px;">
                 <div class="col-12">
                 <label>Заголовок темы:</label>
-                <input type="text" style="width: 100%; height: 40px;" value="<?=$paragraph['Name']?>"> 
+                <input id="paragraph_name" type="text" style="width: 100%; height: 40px;" value="<?=$paragraph['Name']?>"> 
                     <div style="margin-left: 50px; margin-bottom: 30px;">
                     <p>
                     <label>Описание темы:</label>
-                        <textarea rows="5" style ="resize: both; width: 100%;" name="Description" > <?=$paragraph['Description']?> </textarea>
+                        <textarea id = "paragraph_description"rows="5" style ="resize: both; width: 100%;" name="Description" > <?=$paragraph['Description']?> </textarea>
                     </p> 
+                    <button id = "confirm_par_edit">Подтвердить изменения</button> 
+                    <label id="changed_label">Изменения не произведены</label>
                     </div>
                 </div>
                 <div>
-                    <label>Добавить новый билет в тему</label>
+                <label>Добавить новый билет в тему</label>
                     <br>
                     <form>
                         <label >Вопрос: </label>
@@ -71,8 +72,7 @@ $course_id = get_courseID_by_paragraph($paragraph);
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>             
+            </div>          
     </div>
 </div>
 
