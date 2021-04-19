@@ -32,7 +32,6 @@ $user = get_user_by_id($user_id);
         <br>
     <?endif;?>
     
-    <a href="../AuthAndReg/Logout.php" style="color: red;">Выход</a>
     <? $res_arr =  get_my_grades($user_id)?>
     <?foreach($res_arr as $res): ?>
     

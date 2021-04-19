@@ -25,6 +25,10 @@ input{
     border-bottom: 2px solid #e3e3e3;
     outline: none;
 }
+.oddinput{
+    background-color: transparent;
+    border-bottom: 2px solid #888888;
+}
 .error{
     border-bottom: 2px solid rgb(170, 41, 41);
 }

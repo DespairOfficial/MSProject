@@ -147,8 +147,6 @@ function AddToParagraph()
             paragraph_id
         },
         success(data){
-            console.log(13)
-            $('#rand_num_tickets').attr('max',data.rnd_tick_num)
             markedElements.forEach(function(markedElem)
             {
                 markedElem.classList.remove("MarkedToParagraph")
@@ -261,7 +259,6 @@ $('#addnewticket').click (function(e){
         success (data){
             if(data.status)
             {
-                $('#rand_num_tickets').attr('max',data.rnd_tick_num)
                 $('#addedmessage').text(data.message)
                 let div = document.createElement('div');
                 ticket_id = data.ticket_id
@@ -409,18 +406,24 @@ $('#edit_user_role').click (function(e){ //кнопка подтверждени
 
 })
 
-$('#rand_num_tickets').change(function (e){
-   e.preventDefault();
+$('.rand_num_tickets').change(function (e){
+    let id = $(this).prop('id').replace('rand_num_tickets',''),
+    num = $(this).val()
+    $('.RndMsg'+id).text('')
     $.ajax({
-        url: 'GetRandTicketNum.php',
+        url: 'SetRandomTickets.php',
         type: 'POST',
         dataType: 'json',
         data: {
-            paragraph_id: paragraph_id
+           id: id,
+           num: num,
         },
         success (data){
-            $('label[for="rand_num_tickets"]').text(data.tickets_in_course)
-            //$('#rand_num_tickets').attr('max',data.tickets_in_course)
+            if(data.status == 0)
+            {
+                $('.RndMsg'+id).text(data.message)
+            }
+            
         }
     })
 })

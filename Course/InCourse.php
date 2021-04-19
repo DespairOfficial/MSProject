@@ -43,6 +43,12 @@ $_SESSION['curr_course'] = $course_id;
                             <p>
                                 <a href="EditParagraph.php?id=<?=$paragraph['id']?>">Редактировать тест</a>   
                             </p>
+                            <p>
+                                <label for="rand_num_tickets">Выбрать количество случайных билетов для теста из <?=amount_tickets_by_par_id($paragraph['id'])?></label>  <input class = 'oddinput rand_num_tickets' id = "rand_num_tickets<?=$paragraph['id']?>" min="0" max = "<?=amount_tickets_by_par_id($paragraph['id'])?>" type="number">    
+                            </p>
+                            <p class='RndMsg<?=$paragraph['id']?>'>
+                                
+                            </p>
                             <?endif;?>
                         </div>
                         

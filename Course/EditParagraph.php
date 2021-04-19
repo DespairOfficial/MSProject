@@ -36,7 +36,7 @@ if(($_SESSION['user']['Role']!='Admin') and (($_SESSION['user']['id'])!=(get_own
                     <label id="changed_label"></label>
                     </div>
                 </div>
-                <label for="rand_num_tickets">Выбрать количество случайных билетов для теста</label>  <input id = "rand_num_tickets" min="0"  type="number">    
+
                 <div>
                 </div>
 

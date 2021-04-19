@@ -266,3 +266,12 @@ function get_owner_id_by_course($course_id)
     return $teacher_id['TeacherId'];
 
 }
+function amount_tickets_by_par_id($paragraph_id)
+{
+    global $link;
+    $query = "SELECT COUNT(*) FROM paragraph_tickets where paragraph_id = '$paragraph_id'";
+    $result = mysqli_query($link, $query);
+    $count = mysqli_fetch_assoc($result);
+    return $count['COUNT(*)'];
+
+}
