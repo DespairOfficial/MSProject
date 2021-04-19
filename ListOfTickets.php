@@ -1,7 +1,11 @@
 <?php require 'assets/Header.php' ?>
 
 <?php
-
+if($_SESSION['user']['Role']!='Admin')
+{
+    header('Location: index.php');
+    die();
+}
 $tickets = get_tickets(); 
 ?>
 

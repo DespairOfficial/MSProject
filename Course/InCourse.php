@@ -38,7 +38,8 @@ $_SESSION['curr_course'] = $course_id;
                                     Вы уже прошли этот тест  
                                     </p>
                                 <?endif;?>
-                            <?else: ?>
+                            <?endif;?>
+                            <?if((($_SESSION['user']['id'])==(get_owner_id_by_course($course_id))) or ($_SESSION['user']['Role'])=='Admin'):?>
                             <p>
                                 <a href="EditParagraph.php?id=<?=$paragraph['id']?>">Редактировать тест</a>   
                             </p>
@@ -50,7 +51,7 @@ $_SESSION['curr_course'] = $course_id;
             </div>
             
         <?php endforeach;  ?>
-        <?if(!($_SESSION['user']['Role']==='Student')):?>
+        <?if((($_SESSION['user']['id'])==(get_owner_id_by_course($course_id))) or ($_SESSION['user']['Role'])=='Admin'):?>
         <button id = "addparagraph">Добавить</button>
         <?endif;?>
     </div>

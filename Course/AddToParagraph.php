@@ -20,5 +20,6 @@ foreach($ticket_ids as $id)
 {
     addTicketsToParagraph($paragraph_id,$id);
 }
+
 $responce = ['status' => 'Succass'];
 echo json_encode($responce);

@@ -1,10 +1,10 @@
 <?php 
-	session_start();
-	 if(!$_SESSION['user'])
-	{
-		header('Location: ../AuthAndReg/Auth.php');
-		die();
-	}
+session_start();
+if(!$_SESSION['user'])
+{
+	header('Location: ../AuthAndReg/Auth.php');
+	die();
+}
 require_once 'Database.php';
 require_once 'Functions.php';
 ?>

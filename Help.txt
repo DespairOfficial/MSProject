@@ -1,8 +1,0 @@
-                        <?php
-                            $tickets_ids = get_tickets_ids_by_paragraph($paragraph_id);
-                            foreach($tickets_ids as $ticket_id):?>
-                                <?$ticket = get_ticket_by_id($ticket_id['Ticket_id']);?>
-                                <p><?=$ticket['Question']?></p>
-                                <p><?=$ticket['Answer']?></p>
-                            <?endforeach;?>
-Левый столбец - билеты, находящиеся в текущей теме.

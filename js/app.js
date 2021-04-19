@@ -147,6 +147,8 @@ function AddToParagraph()
             paragraph_id
         },
         success(data){
+            console.log(13)
+            $('#rand_num_tickets').attr('max',data.rnd_tick_num)
             markedElements.forEach(function(markedElem)
             {
                 markedElem.classList.remove("MarkedToParagraph")
@@ -154,7 +156,6 @@ function AddToParagraph()
                 let idstr = markedElem.id
                 let ticket_id = idstr.replace('row','')
                 markedElem.setAttribute('onclick',`mark_this_to_remove(${ticket_id})`)
-
             })
         }
     })
@@ -260,6 +261,7 @@ $('#addnewticket').click (function(e){
         success (data){
             if(data.status)
             {
+                $('#rand_num_tickets').attr('max',data.rnd_tick_num)
                 $('#addedmessage').text(data.message)
                 let div = document.createElement('div');
                 ticket_id = data.ticket_id
@@ -350,7 +352,7 @@ $('#editprofile').click (function(e){
 $('#confirm_par_edit').click (function(e){
     e.preventDefault();
     let name = $('#paragraph_name').val(), 
-    description = $('textarea[name="Description"]').val();
+    description = $('textarea[name="Description"]').val()
     $.ajax({
 
         url: 'ConfirmParagraphEdit.php',
@@ -358,8 +360,9 @@ $('#confirm_par_edit').click (function(e){
         dataType: 'json',
         data: {
             name: name,
-            description: description
-        }, 
+            description: description,
+            paragraph_id: paragraph_id   
+             }, 
         success (data){
             $('#changed_label').text(data.message);
             if(!data.status)
@@ -368,6 +371,56 @@ $('#confirm_par_edit').click (function(e){
                     $('#'+field).addClass('error')
                 })
             }
+        }
+    })
+})
+
+$('.dropdown').click(function () {
+    $(this).attr('tabindex', 1).focus();
+    $(this).toggleClass('active');
+    $(this).find('.dropdown-menu').slideToggle(300);
+});
+$('.dropdown').focusout(function () {
+    $(this).removeClass('active');
+    $(this).find('.dropdown-menu').slideUp(300);
+});
+$('.dropdown .dropdown-menu li').click(function () {
+    $(this).parents('.dropdown').find('span').text($(this).text());
+    $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
+});
+/*End Dropdown Menu*/
+
+
+$('#edit_user_role').click (function(e){ //кнопка подтверждения кодового слова
+    e.preventDefault();
+    let role = $('#UserRole').val()
+    $.ajax({
+        url: '../EditUserRole.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: user_id,
+            role: role
+        },
+        success (data){
+
+        }
+    })
+
+})
+
+$('#rand_num_tickets').change(function (e){
+   e.preventDefault();
+    $.ajax({
+        url: 'GetRandTicketNum.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            paragraph_id: paragraph_id
+        },
+        success (data){
+            $('label[for="rand_num_tickets"]').text(data.tickets_in_course)
+            //$('#rand_num_tickets').attr('max',data.tickets_in_course)
         }
     })
 })

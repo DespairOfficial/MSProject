@@ -5,11 +5,18 @@ if($_SESSION['user']['role']=='Studnet')
     header('Location: ../AuthAndReg/Auth.php');
     die();
 }
+
 require '../assets/Header.php';
 
 $paragraph_id = trim($_GET["id"]);
 $paragraph = get_paragraph_by_id($paragraph_id);
-$course_id = get_courseID_by_paragraph($paragraph);
+$course_id = $paragraph['OwnerCourse'];
+
+if(($_SESSION['user']['Role']!='Admin') and (($_SESSION['user']['id'])!=(get_owner_id_by_course($course_id))))
+{
+    header('Location: ../index.php');
+    die();
+}
 ?>
 <script>
     let paragraph_id = <?=$paragraph_id?>
@@ -26,9 +33,13 @@ $course_id = get_courseID_by_paragraph($paragraph);
                         <textarea id = "paragraph_description"rows="5" style ="resize: both; width: 100%;" name="Description" > <?=$paragraph['Description']?> </textarea>
                     </p> 
                     <button id = "confirm_par_edit">Подтвердить изменения</button> 
-                    <label id="changed_label">Изменения не произведены</label>
+                    <label id="changed_label"></label>
                     </div>
                 </div>
+                <label for="rand_num_tickets">Выбрать количество случайных билетов для теста</label>  <input id = "rand_num_tickets" min="0"  type="number">    
+                <div>
+                </div>
+
                 <div>
                 <label>Добавить новый билет в тему</label>
                     <br>
@@ -47,7 +58,7 @@ $course_id = get_courseID_by_paragraph($paragraph);
                         <?$paragraph_tickets = get_tickets_by_paragraph($paragraph_id);?>
                         <div class="containter-fluid" id ="paragraphtickets">
                             <?php foreach($paragraph_tickets as $ticket):?> 
-                                <div class="row border" id="row<?=$ticket['id']?>" onclick="mark_this_to_remove(<?=$ticket['id']?>)">
+                                <div class="row border paragraphtickets" id="row<?=$ticket['id']?>" onclick="mark_this_to_remove(<?=$ticket['id']?>)">
                                         <label name = 'Question' >Вопрос: <?=$ticket['Question']?></label>
                                         <label name= 'Answer' >Ответ: <?=$ticket['Answer']?></label>
                                         <label name='id' >Номер билета: <?=$ticket['id']?></label>

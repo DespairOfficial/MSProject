@@ -3,7 +3,11 @@
 
 require 'assets/Header.php'; ?>
 <?php 
-
+if($_SESSION['user']['Role']=='Student')
+{
+    header('Location: index.php');
+    die();
+}
 
 $ticket_id = $_GET['id'];    //получаем id билета из строки запроса(из глобального get массива)
 $ticket =  get_ticket_by_id($ticket_id); //получаем массив данных билета по id

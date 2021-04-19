@@ -9,7 +9,7 @@ session_start();
     <div class = "container">
         <div class="content">
             <ul class="bmenu">
-            <?if(!($_SESSION['user']['Role']=='Student')):?>
+            <?if(($_SESSION['user']['Role']=='Admin')):?>
                 <li><a href="ListOfUsers.php">Пользователи</a></li>
                 <li><a href="ListOfTickets.php">Список билетов</a></li>
             <?endif;?>

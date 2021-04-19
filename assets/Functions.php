@@ -69,7 +69,7 @@ function get_tickets_by_course_not_in_paragraph($course_id, $paragraph_id )
     $course_id = (int)$course_id;
     $paragraph_id = (int)$paragraph_id;
 
-    $query = "SELECT * FROM tickets LEFT JOIN paragraph_tickets ON paragraph_tickets.ticket_id = tickets.id WHERE tickets.CourseId = '$course_id' AND paragraph_tickets.paragraph_id is NULL";
+    $query = "SELECT * FROM (SELECT * FROM paragraph_tickets WHERE paragraph_id = '$paragraph_id') AS Para RIGHT JOIN tickets ON tickets.id = Para.ticket_id WHERE tickets.CourseId = '$course_id' AND Para.paragraph_id is Null";  
     $result = mysqli_query($link, $query);
     $tickets = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $tickets;
@@ -256,4 +256,13 @@ function get_my_grades($student_id)
     }
     
     return $res;
+}
+function get_owner_id_by_course($course_id)
+{
+    global $link;
+    $query = "SELECT TeacherId FROM courses WHERE id = '$course_id'";
+    $result = mysqli_query($link, $query);
+    $teacher_id = mysqli_fetch_assoc($result);
+    return $teacher_id['TeacherId'];
+
 }

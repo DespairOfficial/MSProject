@@ -1,5 +1,10 @@
 <?php require 'assets/Header.php' ?>
 <?php 
+if($_SESSION['user']['Role']!='Admin')
+{
+    header('Location: index.php');
+    die();
+}
 $creator_id = trim($_GET["id"]);
 $tickets = get_tickets_by_creator($creator_id);  
 

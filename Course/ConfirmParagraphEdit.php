@@ -6,7 +6,7 @@ if($_SESSION['user']['role']=='Studnet')
     die();
 }
 require_once '../assets/Database.php';
-
+$paragraph_id = $_POST['paragraph_id'];
 $name = $_POST['name'];
 $description = $_POST['description'];
 $error_fields = [];
@@ -26,7 +26,9 @@ if(count($error_fields)!=0)
     die();
 }
 else
-{    
+{   global $link;
+    $query = "UPDATE paragraphs SET Name = '$name', Description = '$description' WHERE id = '$paragraph_id'";
+    mysqli_query($link, $query);
     $responce = ["status"=>true,"message"=>"Изменения применены"];
     echo json_encode($responce);
     die();
